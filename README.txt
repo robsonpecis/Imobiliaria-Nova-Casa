@@ -1,0 +1,1 @@
+Esse projeto é um site ficticio de uma imobiliaria para fins de estudo
