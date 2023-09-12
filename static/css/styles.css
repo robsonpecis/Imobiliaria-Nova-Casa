@@ -1,14 +1,15 @@
+/* Personalização da homepage */
 .center {
     margin: auto;
     width: 50%;
     padding: 10px;
   }
 
-input[type=submit] {
+.buttons_homepage[type=submit] {
     font-size:2.0em;
 }
 
-input[type=text] {
+.boxtext_size[type=text] {
   font-size:2.0em;
 }
 
@@ -16,6 +17,7 @@ form {
   display: inline;
 }
 
+/* personalização da tabela de clientes */
 .table {
   border-spacing: 0;
   margin: 1rem;
@@ -37,6 +39,40 @@ form {
 }
 
 .table__div {
+  margin: auto;
   width: 100%;
+  padding: 10px;
+}
+
+/* Personalização do perfil do usuario */
+.container{
+  width: 80%;
+  height: 400px;
+  background: black;
+  margin: auto;
+  padding: 5px;
+}
+.one{
+  width: 50%;
+  height: 400px;
+  background: lightcyan;
+  float: left;;
+}
+.two{
+  margin-left: 50%;
+  height: 400px;
+  padding-left: 100px;
+  background: lightgray;
+}
+
+.center_one{
+  margin: auto;
+  width: 50%;
+  padding: 30px;
+}
+
+.center_two{
+  margin: auto;
+  width: 50%;
   padding: 10px;
 }

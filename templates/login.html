@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="../static/css/styles.css">
+</head>
+<body>
+    <div class="center">
+        <h1>Faça Login</h1>
+        <form method="POST" action="">
+            login:
+            <p><input type="text" placeholder="Usuario" name="username" value="{{request.form.username}}"></p>
+            Senha:
+            <p><input type="password" placeholder="Senha" name="password" value="{{request.form.password}}"></p>
+            <input type="submit" value="Logar" href="{{url_for('perfil_adm')}}">
+        </form>
+        {% if error %}
+        <p><strong>Error:</strong> {{ error }}
+        {% endif %}
+    </div>
+</body>
+</html>

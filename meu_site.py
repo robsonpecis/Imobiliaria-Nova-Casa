@@ -9,8 +9,8 @@ app = Flask(__name__)
 def button_imoveis_redirect():
     if request.method == "POST" and request.form == "imoveis":
         return redirect(url_for("imoveis"))
-    elif request.method == 'POST' and request.form == 'perfil_usuario':
-        return redirect(url_for(f"perfil_usuario"))
+    elif request.method == 'POST' and request.form == 'login':
+        return redirect(url_for(f"login"))
     elif request.method == "GET":
         return render_template("homepage.html")
 
@@ -23,20 +23,26 @@ for indice, cliente in enumerate(Clientes):
             conjunto.append(cliente[indice])
         conjunto_tuple = tuple(conjunto)
         data.append(conjunto_tuple)
-print(data)
 data_tuple = tuple(data)
-print(headings)
-print(data_tuple)
 
 @app.route("/imoveis")
 def imoveis():
     return render_template("imoveis.html", headings=headings, data_tuple=data_tuple)
 
+#Rota pagina de login do adm
+@app.route("/login", methods=["POST", "GET"])
+def login():
+    error = None
+    if request.method == "POST":
+        if request.form['username'] != 'admin' and request.form['password'] != 'admin':
+            error = 'Credenciais invalidas. Tente novamente'
+        else:
+            return redirect(url_for("perfil_adm"))
+    return render_template("login.html", error=error)
 
-#Rota para o cadastro de novos clientes no banco de dados
-@app.route("/perfil_usuario")
-def perfil_usuario():
-    return render_template("perfil_usuario.html")
+@app.route("/perfil_adm")
+def perfil_adm():
+    return render_template("perfil_adm.html")
 
 if __name__ == "__main__":
     app.run(debug=True)
