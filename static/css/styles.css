@@ -1,0 +1,42 @@
+.center {
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+  }
+
+input[type=submit] {
+    font-size:2.0em;
+}
+
+input[type=text] {
+  font-size:2.0em;
+}
+
+form {
+  display: inline;
+}
+
+.table {
+  border-spacing: 0;
+  margin: 1rem;
+  background-color: lightcyan;
+}
+
+.table__row:nth-child(even) {
+  background-color: white;
+}
+
+.table__header {
+  background-color:lightsteelblue;
+  text-align: left;
+}
+
+.table__cell {
+  padding: 8px;
+  width: 30%;
+}
+
+.table__div {
+  width: 100%;
+  padding: 10px;
+}

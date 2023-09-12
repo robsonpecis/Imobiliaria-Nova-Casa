@@ -3,10 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <title>Homepage</title>
+    <link rel="stylesheet" href="../static/css/styles.css">
 </head>
 <body>
-
-    Essa é a Homepage do meu site
-
+    <div class="center">
+        <img src="../static/images/logo2.jpg" alt="Logotipo"/>
+    </div>
+        <div class="center">
+            <form methods="POST" action="/imoveis">
+                <input type="submit" href="{{url_for('imoveis')}}" value="Imoveis">
+            </form>
+            <form methods="POST" action="/perfil_usuario">
+                <input type="submit" href="{{url_for('perfil_usuario')}}" value="Pesquisar">
+            </form>
+        </div>
 </body>
 </html>
