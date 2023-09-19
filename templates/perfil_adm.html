@@ -6,30 +6,38 @@
     <link rel="stylesheet" href="../static/css/styles.css">
 </head>
 <body>
-    <div>
-        Aqui será o perfil do ADM, onde poderá cadastrar usuarios no banco e até deletar
-    </div>
     <div class="container">
-        <div class="one">
-            <div class="center_one">
-                Nome do Cliente:
-                <input type="text" name="name" id="client_name">
-                <p>Tipo de imovel:
-                <select name="select">
-                    <option value="Escolher">Escolha uma opção</option>
-                    <option value="Apartamento">Apartamento</option>
-                    <option value="Casa">Casa</option>
-                </select></p>
-                <p>Valor do imovel:
-                <input type="text" name="value" id="value"></p>
-                <p><input type="submit" value="Cadastrar"></p>
+            <div class="one">
+                <div class="center_one">
+                    <form method="POST">
+                        <input type="hidden" name="validation_form" value="submit_client">
+                        Nome do Cliente:
+                        <input type="text" name="client_name" value="{{request.form.client_name}}">
+                        <p>Tipo de imovel:
+                        <select name="combobox">
+                            <option value="default">Escolha uma opção</option>
+                            <option value="Apartamento">Apartamento</option>
+                            <option value="Casa">Casa</option>
+                        </select></p>
+                        <p>Valor do imovel:
+                        <input type="number" name="price" value="{{request.form.price}}"></p>
+                        <p><input type="submit" value="Cadastrar"></p>
+                    </form>
+                    {% if error %}
+                    <p><strong>Error:</strong> {{ error }}
+                    {% endif %}
+                    {% if sucesso %}
+                    <p><strong>Sucesso:</strong> {{ sucesso }}
+                    {% endif %}
+                </div>
             </div>
-        </div>
         <div class="two">
             <div class="center_two">
-                Insira a Id do cliente para deletar do cadastro
-                <input type="text" id="client_id">
-                <input type="submit" value="Deletar">
+                <form>
+                    Insira a Id do cliente para deletar do cadastro:
+                    <input type="number" id="client_id">
+                    <p><input type="submit" value="Deletar"></p>
+                </form>
             </div>
         </div>
     </div>
