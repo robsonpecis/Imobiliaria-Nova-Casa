@@ -7,13 +7,17 @@
 </head>
 <body>
     <div class="container">
-            <div class="one">
-                <div class="center_one">
+        <div class="box">
+            <div class="box-row">
+                <div class="box-cell box1">
                     <form method="POST">
-                        Nome do Cliente:
+                        <hi>CADASTRAR CLIENTE</hi>
+                        <p></p>
+                        <p class="p">Nome do Cliente:</p>
                         <input type="text" name="client_name" value="{{request.form.client_name}}">
-                        <p>Tipo de imovel:
-                        <select name="combobox">
+                        <p></p>
+                        <p class="p">Tipo de imovel:</p>
+                        <p class="p"><select name="combobox">
                             <option value="default">Escolha uma opção</option>
                             <option value="Apartamento">Apartamento</option>
                             <option value="Casa">Casa</option>
@@ -29,23 +33,55 @@
                     <p><strong>Sucesso:</strong> {{ sucesso }}
                     {% endif %}
                 </div>
-            </div>
-        <div class="two">
-            <div class="center_two">
-                <form method="POST">
-                    Insira a Id do cliente para deletar do cadastro:
-                    <input type="number" name="client_id" value="{{request.form.client_id}}">
-                    <p><input type="submit" name="delete_client" value="Deletar"></p>
-                    {% if error_delete %}
-                    <p><strong>Error:</strong> {{ error_delete }}
-                    {% endif %}
-                    {% if error_client_not_found %}
-                    <p><strong>Error:</strong> {{ error_client_not_found }}
-                    {% endif %}
-                    {% if sucesso_delete %}
-                    <p><strong>Sucesso:</strong> {{ sucesso_delete }}
-                    {% endif %}
-                </form>
+
+                <div class="box-cell box2">
+                    <form method="POST">
+                        <hi>DELETAR CLIENTE</hi>
+                        <p></p>
+                        Insira a Id do cliente para deletar do cadastro:
+                        <p class="p"><input type="number" name="delete_client_id" value="{{request.form.delete_client_id}}"></p>
+                        <p><input type="submit" name="delete_client" value="Deletar"></p>
+                        {% if error_delete %}
+                        <p><strong>Error:</strong> {{ error_delete }}
+                        {% endif %}
+                        {% if error_client_not_found %}
+                        <p><strong>Error:</strong> {{ error_client_not_found }}
+                        {% endif %}
+                        {% if sucesso_delete %}
+                        <p><strong>Sucesso:</strong> {{ sucesso_delete }}
+                        {% endif %}
+                    </form>
+                </div>
+
+                <div class="box-cell box3">
+                    <form method="POST">
+                        <hi>ATUALIZAR CLIENTE</hi>
+                        <p></p>
+                        Insira os datos para alterar os dados do cliente.
+                        <p></p>
+                        Id:
+                        <p class="p"><input type="number" name="update_client_id" value="{{request.form.update_client_id}}"></p>
+                        <p></p>
+                        <p class="p">Nome do Cliente:</p>
+                        <input type="text" name="update_client_name" value="{{request.form.update_client_name}}">
+                        <p></p>
+                        <p class="p">Tipo de imovel:</p>
+                        <p class="p"><select name="combobox">
+                            <option value="default">Escolha uma opção</option>
+                            <option value="Apartamento">Apartamento</option>
+                            <option value="Casa">Casa</option>
+                        </select></p>
+                        <p>Valor do imovel:
+                        <input type="number" name="update_price" value="{{request.form.update_price}}"></p>
+                        <p><input type="submit" name="update_client" value="Atualizar"></p>
+                        {% if error_client_id %}
+                        <p><strong>Error:</strong> {{ error_client_id }}
+                        {% endif %}
+                        {% if sucesso_update %}
+                        <p><strong>Sucesso:</strong> {{ sucesso_update }}
+                        {% endif %}
+                    </form>
+                </div>
             </div>
         </div>
     </div>

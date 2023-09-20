@@ -44,8 +44,10 @@ def perfil_adm():
     error_submit = None
     error_delete = None
     error_client_not_found = None
+    error_client_id = None
     sucesso = None
     sucesso_delete = None
+    sucesso_update = None
 
     if request.method == "POST":
         if 'submit_client' in request.form: # Verifica se é o formulario de submit/cadastro
@@ -63,21 +65,38 @@ def perfil_adm():
                                 sucesso = 'Adicionado com  sucesso'
                                 break
                             number += 1
-        elif 'delete_client' in request.form: # Verifica se é o formulado de delete
-                if len(request.form['client_id']) < 1 or int(request.form['client_id']) < 1:
+        elif 'delete_client' in request.form: # Verifica se é o formulario de delete
+                if len(request.form['delete_client_id']) < 1 or int(request.form['delete_client_id']) < 1:
                         error_delete = "Insira um valor valido"
                 else:
                     for indice, cliente in enumerate(Clientes):
-                            if cliente["Id"] == int(request.form['client_id']):
+                            if cliente["Id"] == int(request.form['delete_client_id']):
                                 del Clientes[indice]
                                 sucesso_delete = 'Usuario deletado com sucesso'
                                 break
-                            elif cliente["Id"] < int(request.form['client_id']):
+                            elif int(cliente["Id"]) < int(request.form['delete_client_id']):
                                 None
-                            elif cliente["Id"] > int(request.form['client_id']):
+                            elif int(cliente["Id"]) > int(request.form['delete_client_id']):
                                 error_client_not_found = "Usuario não encontrado"
+        elif 'update_client' in request.form: #Verifica se é o formulario de update
+            if  len(request.form['update_client_id']) < 1:
+                 error_client_id = "Insira uma Id válida"
+            else:
+                if len(request.form['update_client_name']) <= 0 or request.form['combobox']  == 'default' or len(request.form['update_price']) < 1 or int(float(request.form['update_price'])) < 1:
+                    error_client_id = 'Insira dados validos.'
+                else:
+                    for indice, cliente in  enumerate(Clientes):
+                            if cliente["Id"] == int(request.form['update_client_id']):
+                                Clientes[indice].update(new_submit(request.form['update_client_id'], request.form['update_client_name'], request.form['combobox'], request.form['update_price']))
+                                sucesso_update = 'Cliente atualizado com sucesso.'
+                                break
+                            elif int(cliente["Id"]) < int(request.form['update_client_id']):
+                                None
+                            elif int(cliente["Id"]) > int(request.form['update_client_id']):
+                                error_client_id = 'Usuario não encontrado. Insira uma Id valida.'
                     
-    return render_template("perfil_adm.html", error_submit=error_submit, sucesso=sucesso, error_delete=error_delete, error_client_not_found=error_client_not_found, sucesso_delete=sucesso_delete)
+    return render_template("perfil_adm.html", error_submit=error_submit, sucesso=sucesso, error_delete=error_delete, 
+                           error_client_not_found=error_client_not_found, sucesso_delete=sucesso_delete, error_client_id=error_client_id, sucesso_update=sucesso_update)
 
 # Função usada pela rota de cadastro para adicionar no banco de dados
 new_client = {}

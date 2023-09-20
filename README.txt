@@ -6,3 +6,4 @@ Atualmente é possivel:
     a pagina possui verificação dos dados para login
 - na pagina do administrador é possivel cadastrar novos clientes no banco de dados
 - agora também é possivel deletar clientes do banco de dados
+- sistema de update de clientes funcionando
