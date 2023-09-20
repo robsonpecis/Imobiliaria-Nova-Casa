@@ -10,7 +10,6 @@
             <div class="one">
                 <div class="center_one">
                     <form method="POST">
-                        <input type="hidden" name="validation_form" value="submit_client">
                         Nome do Cliente:
                         <input type="text" name="client_name" value="{{request.form.client_name}}">
                         <p>Tipo de imovel:
@@ -21,10 +20,10 @@
                         </select></p>
                         <p>Valor do imovel:
                         <input type="number" name="price" value="{{request.form.price}}"></p>
-                        <p><input type="submit" value="Cadastrar"></p>
+                        <p><input type="submit" name="submit_client" value="Cadastrar"></p>
                     </form>
-                    {% if error %}
-                    <p><strong>Error:</strong> {{ error }}
+                    {% if error_submit %}
+                    <p><strong>Error:</strong> {{ error_submit }}
                     {% endif %}
                     {% if sucesso %}
                     <p><strong>Sucesso:</strong> {{ sucesso }}
@@ -33,10 +32,19 @@
             </div>
         <div class="two">
             <div class="center_two">
-                <form>
+                <form method="POST">
                     Insira a Id do cliente para deletar do cadastro:
-                    <input type="number" id="client_id">
-                    <p><input type="submit" value="Deletar"></p>
+                    <input type="number" name="client_id" value="{{request.form.client_id}}">
+                    <p><input type="submit" name="delete_client" value="Deletar"></p>
+                    {% if error_delete %}
+                    <p><strong>Error:</strong> {{ error_delete }}
+                    {% endif %}
+                    {% if error_client_not_found %}
+                    <p><strong>Error:</strong> {{ error_client_not_found }}
+                    {% endif %}
+                    {% if sucesso_delete %}
+                    <p><strong>Sucesso:</strong> {{ sucesso_delete }}
+                    {% endif %}
                 </form>
             </div>
         </div>

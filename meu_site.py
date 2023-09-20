@@ -32,7 +32,7 @@ def imoveis():
 def login():
     error = None
     if request.method == "POST":
-        if request.form['username'] != 'admin' or request.form['password'] != 'admin':
+        if request.form['username'] != 'admin' or request.form['password'] != 'admin': # Verifica se o usuario e senha estão corretos 
             error = 'Credenciais invalidas. Tente novamente'
         else:
             return redirect(url_for("perfil_adm"))
@@ -41,13 +41,16 @@ def login():
 #Rota para o perfil do admin
 @app.route("/perfil_adm", methods=["POST", "GET"])
 def perfil_adm():
-    error = None
+    error_submit = None
+    error_delete = None
+    error_client_not_found = None
     sucesso = None
-    # validation_form = request.form.get()
+    sucesso_delete = None
+
     if request.method == "POST":
-        # if validation_form == 'submit_client':
+        if 'submit_client' in request.form: # Verifica se é o formulario de submit/cadastro
                 if len(request.form['client_name']) <= 0 or request.form['combobox']  == 'default' or len(request.form['price']) < 1 or int(float(request.form['price'])) < 1:
-                    error = 'Dados invalidos. Verifique as informações inseridas'
+                    error_submit = 'Dados invalidos. Verifique as informações inseridas'
                 else:
                         number = 0
                         while number < len(Clientes):
@@ -60,14 +63,23 @@ def perfil_adm():
                                 sucesso = 'Adicionado com  sucesso'
                                 break
                             number += 1
-        # else:
-        #         print('detectou o metodo')
-        #         for indice, cliente in enumerate(Clientes):
-        #             if cliente["Id"] == request.form['client_id']:
-        #                 del Clientes[indice]
-        #                 print('funcionou')
-    return render_template("perfil_adm.html", error=error, sucesso=sucesso)
+        elif 'delete_client' in request.form: # Verifica se é o formulado de delete
+                if len(request.form['client_id']) < 1 or int(request.form['client_id']) < 1:
+                        error_delete = "Insira um valor valido"
+                else:
+                    for indice, cliente in enumerate(Clientes):
+                            if cliente["Id"] == int(request.form['client_id']):
+                                del Clientes[indice]
+                                sucesso_delete = 'Usuario deletado com sucesso'
+                                break
+                            elif cliente["Id"] < int(request.form['client_id']):
+                                None
+                            elif cliente["Id"] > int(request.form['client_id']):
+                                error_client_not_found = "Usuario não encontrado"
+                    
+    return render_template("perfil_adm.html", error_submit=error_submit, sucesso=sucesso, error_delete=error_delete, error_client_not_found=error_client_not_found, sucesso_delete=sucesso_delete)
 
+# Função usada pela rota de cadastro para adicionar no banco de dados
 new_client = {}
 def new_submit(number, name, type, price):
     new_client = {
